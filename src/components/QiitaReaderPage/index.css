@@ -1,0 +1,17 @@
+.grid {
+  display: grid;
+  grid-template-columns: 50% 1fr;
+}
+
+.grid div {
+  margin: 5px;
+}
+
+.grid div:last-child {
+  margin-left: 0;
+}
+
+.post-list ul li:hover {
+  background: rgba(0, 200, 255, .5);
+  cursor: pointer;
+}
