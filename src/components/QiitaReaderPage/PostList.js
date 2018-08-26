@@ -36,7 +36,7 @@ class PostList extends Component {
                 this.props.qiitaPostList.map(post => {
                   return (
                     <li
-                      className={ `${this.state.selectedPostId === post.id ? 'highlight' : ''}`}
+                      className={ `${this.state.selectedPostId === post.id ? 'my-highlight' : ''}`}
                       onClick={ this.handleClickPost.bind(this, post.id) }
                     >
                       { post.title }
