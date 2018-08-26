@@ -3,6 +3,7 @@ import './index.css'
 
 class PostList extends Component {
   constructor (props) {
+    console.log(props)
     super(props)
 
     this.state = {
@@ -15,6 +16,10 @@ class PostList extends Component {
     this.setState({ selectedPostId: id })
   }
 
+  handleClickRefresh () {
+    this.props.refreshPostList()
+  }
+
   render () {
     return (
       <div style={{ gridColumn: '1 / 2', border: '1px solid #ccc' }}>
@@ -24,6 +29,7 @@ class PostList extends Component {
           <button>検索</button>
           </div>
           <h1>記事一覧</h1>
+          <button onClick={ this.handleClickRefresh.bind(this) }>更新</button>
           <div className="post-list">
             <ul>
               {

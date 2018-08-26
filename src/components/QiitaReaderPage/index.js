@@ -13,13 +13,7 @@ class QiitaReaderPage extends Component {
       selectedPostId: ''
     }
 
-    api.getQiitaPost()
-      .then(res => {
-        this.setState({ qiitaPostList: res })
-      })
-      .catch(err => {
-        alert(err)
-      })
+    this.refreshPostList()
   }
 
   getSelectedContent () {
@@ -29,17 +23,24 @@ class QiitaReaderPage extends Component {
   setSelectedPostId (id) {
     this.setState({ selectedPostId: id })
   }
-  
+
+  refreshPostList () {
+    api.getQiitaPost()
+      .then(res => {
+        this.setState({ qiitaPostList: res })
+      })
+      .catch(err => {
+        alert(err)
+      })
+  }
+
   render () {
-    const renderedBody = this.getSelectedContent().hasOwnProperty('rendered_body')
-      ? this.getSelectedContent().rendered_body
-      : ''
-    
     return (
       <div className="grid">
         <PostList
           qiitaPostList={ this.state.qiitaPostList }
           setSelectedPostId={ this.setSelectedPostId.bind(this) }
+          refreshPostList={ this.refreshPostList.bind(this) }
         >
         </PostList>
         <PostContent
