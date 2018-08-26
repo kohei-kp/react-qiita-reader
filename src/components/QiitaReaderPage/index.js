@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import './index.css'
 import api from '../../common/api'
+import PostList from './PostList'
+import PostContent from './PostContent'
 
 class QiitaReaderPage extends Component {
   constructor () {
@@ -24,7 +26,7 @@ class QiitaReaderPage extends Component {
     return this.state.qiitaPostList.find(post => post.id === this.state.selectedPostId) || {}
   }
 
-  handleClickPost (id) {
+  setSelectedPostId (id) {
     this.setState({ selectedPostId: id })
   }
   
@@ -35,27 +37,15 @@ class QiitaReaderPage extends Component {
     
     return (
       <div className="grid">
-        <div style={{ gridColumn: '1 / 2', border: '1px solid #ccc' }}>
-          <div className="search-form">
-            <label className="search-text"></label>
-            <input type="text" id="search-text"></input>
-            <button>検索</button>
-          </div>
-          <h1>記事一覧</h1>
-          <div className="post-list">
-            <ul>
-              {
-                this.state.qiitaPostList.map(post => {
-                  return <li onClick={ this.handleClickPost.bind(this, post.id) }>{ post.title }</li>
-                })
-              }
-            </ul>
-          </div>
-        </div>
-        <div style={{ 'gridColumn': '2 / 3', border: '1px solid #ccc' }}>
-          <h1>記事内容</h1>
-          <div dangerouslySetInnerHTML={{__html: renderedBody }}></div>
-        </div>
+        <PostList
+          qiitaPostList={ this.state.qiitaPostList }
+          setSelectedPostId={ this.setSelectedPostId.bind(this) }
+        >
+        </PostList>
+        <PostContent
+          selectedContent={ this.getSelectedContent() }
+        >
+        </PostContent>
       </div>
     )
   }
